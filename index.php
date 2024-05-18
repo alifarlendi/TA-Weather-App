@@ -4,7 +4,7 @@ $msg="";
 $city="";
 if(isset($_POST['submit'])){
     $city=$_POST['city'];
-    $url="http://api.openweathermap.org/data/2.5/weather?q=$city&appid=49c0bad2c7458f1c76bec9654081a661";
+    $url="http://api.openweathermap.org/data/2.5/weather?q=$city&appid=87f9a198b492010cad00f216287dc031";
     $ch=curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
