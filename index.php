@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
 <html lang="en" class=" -webkit-">
    <head>
       <meta charset="UTF-8">
-      <title>Weather Card</title>
+      <title>Weather App</title>
       <style>
          @import url(https://fonts.googleapis.com/css?family=Poiret+One);
          @import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css);
