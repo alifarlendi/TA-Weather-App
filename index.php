@@ -1,7 +1,7 @@
 <?php
-$status="";
-$msg="";
-$city="";
+$status = "";
+$msg = "";
+$city = "";
 if(isset($_POST['submit'])){
     $city=$_POST['city'];
     $url="http://api.openweathermap.org/data/2.5/weather?q=$city&appid=87f9a198b492010cad00f216287dc031";
@@ -134,7 +134,24 @@ if(isset($_POST['submit'])){
          .mr45{
              margin-right:45px;
          }
+         .cityName{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            width: 100% !important;
+            margin-bottom: 7.5px;
+         }
       </style>
+      <script>
+        window.onload = function() {
+            document.querySelector('.text').value = ''; // Mengosongkan nilai input kota
+            document.querySelector('.msg').innerHTML = ''; // Mengosongkan pesan yang ditampilkan
+        };
+      </script>
    </head>
    <body>
       <div class="form">
@@ -147,6 +164,9 @@ if(isset($_POST['submit'])){
       
       <?php if($status=="yes"){?>
       <article class="widget">
+         <div class="cityName">
+            <?php echo $result['name']?>
+         </div>
          <div class="weatherIcon">
             <img src="http://openweathermap.org/img/wn/<?php echo $result['weather'][0]['icon']?>@4x.png"/>
          </div>
