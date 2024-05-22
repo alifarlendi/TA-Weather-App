@@ -169,5 +169,7 @@ if(isset($_POST['submit'])){
          </div>
       </article>
       <?php } ?>
+      <p style="font-weight: bold; position: fixed; bottom: 0; right: 0; margin: 10px;">&copy; <?php echo date("Y"); ?> Made By Alif Arlendi Putra P. (21120123140042)</p>
    </body>
+</html>
 </html>
