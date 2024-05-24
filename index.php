@@ -17,6 +17,10 @@ if(isset($_POST['submit'])){
         $msg=$result['message'];
     }
 }
+
+function getWindSpeedInMetersPerSecond($speed) {
+    return round($speed * 0.44704, 2);
+}
 ?>
 
 <html lang="en" class=" -webkit-">
@@ -148,8 +152,8 @@ if(isset($_POST['submit'])){
       </style>
       <script>
         window.onload = function() {
-            document.querySelector('.text').value = ''; // Mengosongkan nilai input kota
-            document.querySelector('.msg').innerHTML = ''; // Mengosongkan pesan yang ditampilkan
+            document.querySelector('.text').value = '';
+            document.querySelector('.msg').innerHTML = '';
         };
       </script>
    </head>
@@ -167,7 +171,7 @@ if(isset($_POST['submit'])){
          <div class="cityName">
             <?php echo $result['name']?>
          </div>
-         <div class="weatherIcon">
+         <div class="weatherIcon"></div>
             <img src="http://openweathermap.org/img/wn/<?php echo $result['weather'][0]['icon']?>@4x.png"/>
          </div>
          <div class="weatherInfo">
@@ -180,7 +184,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="description">
                <div class="weatherCondition">Wind</div>
-               <div class="place"><?php echo $result['wind']['speed']?> M/S</div>
+               <div class="place"><?php echo getWindSpeedInMetersPerSecond($result['wind']['speed'])?> M/S</div>
             </div>
          </div>
          <div class="date">
