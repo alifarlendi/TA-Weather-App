@@ -23,7 +23,7 @@ function getWindSpeedInMetersPerSecond($speed) {
 }
 ?>
 
-<html lang="en" class=" -webkit-">
+<html lang="en">
    <head>
       <meta charset="UTF-8">
       <title>Weather App</title>
@@ -53,14 +53,14 @@ function getWindSpeedInMetersPerSecond($speed) {
          border-top-left-radius: 20px;
          border-top-right-radius: 20px;
          background: #FAFAFA;
-         font-family: weathericons;
          display: flex;
          align-items: center;
-         justify-content: space-around;
+         justify-content: center;
          font-size: 100px;
          }
-         .widget .weatherIcon i {
-         padding-top: 30px;
+         .widget .weatherIcon img {
+         width: 150px;
+         height: 150px;
          }
          .widget .weatherInfo {
          flex: 0 0 70%;
@@ -128,7 +128,7 @@ function getWindSpeedInMetersPerSecond($speed) {
          }
          .text{
          width: 80%;
-         padding: 10px
+         padding: 10px;
          }
          .submit{
          height: 39px;
@@ -153,43 +153,41 @@ function getWindSpeedInMetersPerSecond($speed) {
       <script>
         window.onload = function() {
             document.querySelector('.text').value = '';
-            document.querySelector('.msg').innerHTML = '';
         };
       </script>
    </head>
    <body>
       <div class="form">
          <form style="width:100%;" method="post">
-            <input type="text" class="text" placeholder="Enter city name" name="city" value="<?php echo $city?>"/>
+            <input type="text" class="text" placeholder="Enter city name" name="city" value="<?php echo htmlspecialchars($city); ?>"/>
             <input type="submit" value="Submit" class="submit" name="submit"/>
-            <?php echo $msg?>
+            <div class="msg"><?php echo htmlspecialchars($msg); ?></div>
          </form>
       </div>
       
-      <?php if($status=="yes"){?>
+      <?php if($status == "yes"){ ?>
       <article class="widget">
          <div class="cityName">
-            <?php echo $result['name']?>
+            <?php echo htmlspecialchars($result['name']); ?>
          </div>
-         <div class="weatherIcon"></div>
-            <img src="http://openweathermap.org/img/wn/<?php echo $result['weather'][0]['icon']?>@4x.png"/>
+         <div class="weatherIcon">
+            <img src="http://openweathermap.org/img/wn/<?php echo htmlspecialchars($result['weather'][0]['icon']); ?>@4x.png" style="width: 215px; height: 215px;">
          </div>
          <div class="weatherInfo">
             <div class="temperature">
-               <span><?php echo round($result['main']['temp']-273.15)?>°</span>
+               <span><?php echo round($result['main']['temp'] - 273.15); ?>°</span>
             </div>
             <div class="description mr45">
-               <div class="weatherCondition"><?php echo $result['weather'][0]['main']?></div>
-               <div class="place"><?php echo $result['name']?></div>
+               <div class="weatherCondition"><?php echo htmlspecialchars($result['weather'][0]['main']); ?></div>
+               <div class="place"><?php echo htmlspecialchars($result['name']); ?></div>
             </div>
             <div class="description">
                <div class="weatherCondition">Wind</div>
-               <div class="place"><?php echo getWindSpeedInMetersPerSecond($result['wind']['speed'])?> M/S</div>
+               <div class="place"><?php echo getWindSpeedInMetersPerSecond($result['wind']['speed']); ?> M/S</div>
             </div>
          </div>
          <div class="date">
-            <?php echo date('d M',$result['dt'])?> 
-             
+            <?php echo date('d M', $result['dt']); ?> 
          </div>
       </article>
       <?php } ?>
