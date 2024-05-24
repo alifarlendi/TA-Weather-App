@@ -180,7 +180,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="description">
                <div class="weatherCondition">Wind</div>
-               <div class="place"><?php echo $result['wind']['speed']?> M/H</div>
+               <div class="place"><?php echo $result['wind']['speed']?> M/S</div>
             </div>
          </div>
          <div class="date">
