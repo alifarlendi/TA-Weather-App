@@ -4,17 +4,30 @@ $msg = "";
 $city = "";
 if(isset($_POST['submit'])){
     $city=$_POST['city'];
-    $url="http://api.openweathermap.org/data/2.5/weather?q=$city&appid=87f9a198b492010cad00f216287dc031";
-    $ch=curl_init();
-    curl_setopt($ch,CURLOPT_URL,$url);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    $result=curl_exec($ch);
-    curl_close($ch);
-    $result=json_decode($result,true);
+    $weather = new Weather($city);
+    $result = $weather->getWeatherData();
     if($result['cod']==200){
         $status="yes";
     }else{
         $msg=$result['message'];
+    }
+}
+
+class Weather {
+    private $city;
+    
+    public function __construct($city) {
+        $this->city = $city;
+    }
+    
+    public function getWeatherData() {
+        $url = "http://api.openweathermap.org/data/2.5/weather?q=$this->city&appid=87f9a198b492010cad00f216287dc031";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($result, true);
     }
 }
 
@@ -161,7 +174,7 @@ function getWindSpeedInMetersPerSecond($speed) {
          <form style="width:100%;" method="post">
             <input type="text" class="text" placeholder="Enter city name" name="city" value="<?php echo htmlspecialchars($city); ?>"/>
             <input type="submit" value="Submit" class="submit" name="submit"/>
-            <div class="msg"><?php echo htmlspecialchars($msg); ?></div>
+            <div class="msg" style="color: red; font-size: 22.5px; margin-top: 10px;"><?php echo htmlspecialchars($msg); ?></div>
          </form>
       </div>
       
@@ -193,5 +206,6 @@ function getWindSpeedInMetersPerSecond($speed) {
       <?php } ?>
       <p style="font-weight: bold; position: fixed; bottom: 0; right: 0; margin: 10px;">&copy; <?php echo date("Y"); ?> Made By Alif Arlendi Putra P. (21120123140042)</p>
    </body>
+</html>
 </html>
 </html>
